@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Hostname Retrieval</title>
+</head>
+<body>
+    <h1>Web Hostname Retrieval</h1>
+    <p id="hostname"></p>
+
+    <script>
+        // JavaScript code to retrieve and display the hostname
+        document.addEventListener("DOMContentLoaded", function () {
+            // Use the window.location object to get the hostname
+            var hostname = window.location.hostname;
+
+            // Display the hostname on the page
+            document.getElementById("hostname").textContent = "Web Hostname: " + hostname;
+        });
+    </script>
+</body>
+</html>

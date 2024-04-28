@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Submission Form with reCaptcha</title>
+    
+    <!-- Style sheet imported from Internet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+
+    <!-- reCaptcha code -->
+    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
+
+</head>
+<body>
+    <h1>Data Submission Form with reCaptcha</h1>
+    <form action="submit.php" method="post" enctype="multipart/form-data">
+      <div class="g-recaptcha" data-sitekey="6LdO1PIoAAAAAGkziwn4oWaRvmom26ZQBArS0KB1"></div>
+      <br/>
+        <label for="firstname">First Name:</label>
+        <input type="text" name="firstname" required><br>
+
+        <label for="lastname">Last Name:</label>
+        <input type="text" name="lastname" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br>
+<!--
+        <label for="file">File:</label>
+        <input type="file" name="file" accept=".pdf, .doc, .docx"><br>
+-->
+<!--    This is the old button -->
+        <input type="submit" value="Submit"> 
+
+<!-- Button from GPC 
+        <button class="g-recaptcha"
+        data-sitekey="6LdO1PIoAAAAAGkziwn4oWaRvmom26ZQBArS0KB1"
+        data-callback='onSubmit'
+        data-action='submit'>Submit</button>
+-->
+
+<!-- Script from GPC to define a callback function to handle the token -->
+        <script>
+          function onSubmit(token) {
+            document.getElementById("demo-form").submit();
+          } // Use `requestSubmit()` for extra features like browser input validation.
+        </script>
+
+    </form>
+
+    <!-- Added from GPC 
+    <div class="g-recaptcha" data-sitekey="6LdO1PIoAAAAAGkziwn4oWaRvmom26ZQBArS0KB1" data-action="LOGIN"></div>
+    -->
+</body>
+       
+</html>
