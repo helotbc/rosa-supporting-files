@@ -1,0 +1,6 @@
+postHooks:
+  - kind: ExecHook
+    command: ['/opt/app/init-schema.sh']  # Replace with a script to download and execute the schema
+    # Download the script from Github before execution (replace URL with your actual script location)
+    preCommands: ['curl', '-sfL', 'https://github.com/helotbc/rosa-supporting-files/blob/main/studentsdb.sh', '>','/opt/app/init-schema.sh']
+    # Combine download and execution commands into a single list
