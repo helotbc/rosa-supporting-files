@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS students;
+    USE students;
+    CREATE TABLE IF NOT EXISTS students (
+       firstname VARCHAR(255) NOT NULL,
+      lastname VARCHAR(255) NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      PRIMARY KEY (email) -- Set email as the primary key for efficient lookups
+    );
