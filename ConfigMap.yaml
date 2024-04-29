@@ -3,6 +3,11 @@ kind: ConfigMap
 metadata:
   name: mysql-init-script
 data:
+  MYSQL_DATABASE: "students"
+  MYSQL_USER: "root"
+  default_auth: |
+    [mysqld]
+    default_authentication_plugin=mysql_native_password
   init.sql: |
     CREATE DATABASE IF NOT EXISTS students;
     USE students;
