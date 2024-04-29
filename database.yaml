@@ -286,6 +286,8 @@ spec:
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql/data
+          #  - name: mysql-init-script
+          #    mountPath: /docker-entrypoint-initdb.d
           terminationMessagePolicy: File
           image: >-
             image-registry.openshift-image-registry.svc:5000/openshift/mysql@sha256:6443851109d1afaa39ddd86a608729e031be459dcea9f6f86a24382ae3c655e4
