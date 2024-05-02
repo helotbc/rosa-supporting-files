@@ -7,15 +7,18 @@ MYSQL_HOST="mysql"  # Replace with your MySQL service name
 MYSQL_USER="root"
 MYSQL_PASSWORD="this-is-the-root-785-password"
 
-echo "Checking if MySQL server is running..." >> dbscript.log
+
 
     echo "Sleeping for 2 minutes..." >> dbscript.log
-    # Sleep for 2 minutes
+    # Sleep for 5 minutes
     sleep 600
 
     echo "End of sleep" >> dbscript.log
 
 # Check if MySQL server is running
+
+echo "Checking if MySQL server is running..." >> dbscript.log
+
 if mysqladmin ping -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" &>/dev/null; then
     echo "MySQL server is running." >> dbscript.log
 
