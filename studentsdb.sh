@@ -9,15 +9,15 @@ MYSQL_PASSWORD="this-is-the-root-785-password"
 
 echo "Checking if MySQL server is running..." >> dbscript.log
 
-# Check if MySQL server is running
-if mysqladmin ping -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" &>/dev/null; then
-    echo "MySQL server is running." >> dbscript.log
-
     echo "Sleeping for 2 minutes..." >> dbscript.log
     # Sleep for 2 minutes
     sleep 120
 
     echo "End of sleep" >> dbscript.log
+
+# Check if MySQL server is running
+if mysqladmin ping -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" &>/dev/null; then
+    echo "MySQL server is running." >> dbscript.log
 
     # Connect to MySQL server and execute commands
     mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" << EOF
