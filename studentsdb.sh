@@ -3,7 +3,7 @@
 # Replace with your MySQL connection details (ensure these are secured using secrets in production)
 MYSQL_HOST="mysql"  # Replace with your MySQL service name
 MYSQL_USER="root"
-MYSQL_PASSWORD="this-is-root-785-password"
+MYSQL_PASSWORD="this-is-the-root-785-password"
 
 # sleep for 5min
 sleep 300
