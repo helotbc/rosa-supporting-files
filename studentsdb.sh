@@ -12,13 +12,13 @@ sleep 120
 mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD << EOF
 
   -- Create the database named 'students'
-  CREATE DATABASE students;
+  CREATE DATABASE IF NOT EXISTS students;
 
   -- Use the newly created database
   USE students;
 
   -- Create the table named 'students'
-  CREATE TABLE students (
+  CREATE TABLE IF NOT EXISTS students (
     firstname VARCHAR(255) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -26,13 +26,13 @@ mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD << EOF
   );
 
   -- Create the user 'brendan123'
-  CREATE USER 'brendan123'@'%' IDENTIFIED BY 'this-is-3857-password';
+  -- CREATE USER 'brendan123'@'%' IDENTIFIED BY 'this-is-3857-password';
 
   -- Grant all privileges on the 'students' database to the user 'brendan123'
-  GRANT ALL PRIVILEGES ON students.* TO 'brendan123'@'%';
+  -- GRANT ALL PRIVILEGES ON students.* TO 'brendan123'@'%';
 
   -- Flush privileges to apply changes
-  FLUSH PRIVILEGES;
+  -- FLUSH PRIVILEGES;
 
 EOF
 
