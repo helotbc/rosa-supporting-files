@@ -1,0 +1,8 @@
+sh-4.4$ whoami
+1000770000
+sh-4.4$ pwd
+/opt/app-root/src
+sh-4.4$ ls -lh
+total 4.0K
+-rwxr-xr-x. 1 1000770000 root 850 May  2 20:58 studentsdb.sh
+sh-4.4$ ./studentsdb.sh 
