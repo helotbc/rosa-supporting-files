@@ -3,16 +3,16 @@ apiVersion: apps.openshift.io/v1
 metadata:
   annotations:
     template.alpha.openshift.io/wait-for-ready: 'true'
-  resourceVersion: '3120013'
+  resourceVersion: '2136092'
   name: mysql
-  uid: 9b64e021-a18b-42ca-86a0-22e869ca11f8
-  creationTimestamp: '2024-05-02T16:35:15Z'
-  generation: 2
+  uid: 272f1b7f-5816-44d5-8423-d915ec3d1e98
+  creationTimestamp: '2024-04-28T20:54:00Z'
+  generation: 3
   managedFields:
     - manager: openshift-controller-manager
       operation: Update
       apiVersion: apps.openshift.io/v1
-      time: '2024-05-02T16:35:16Z'
+      time: '2024-04-28T20:54:01Z'
       fieldsType: FieldsV1
       fieldsV1:
         'f:metadata':
@@ -131,10 +131,27 @@ metadata:
                     .: {}
                     'f:claimName': {}
           'f:triggers': {}
+    - manager: Mozilla
+      operation: Update
+      apiVersion: apps.openshift.io/v1
+      time: '2024-04-28T20:59:32Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:template':
+            'f:spec':
+              'f:volumes':
+                'k:{"name":"mysql-init-script"}':
+                  .: {}
+                  'f:configMap':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:name': {}
+                  'f:name': {}
     - manager: openshift-controller-manager
       operation: Update
       apiVersion: apps.openshift.io/v1
-      time: '2024-05-02T16:35:32Z'
+      time: '2024-04-28T20:59:49Z'
       fieldsType: FieldsV1
       fieldsV1:
         'f:status':
@@ -171,7 +188,7 @@ metadata:
   labels:
     app.openshift.io/runtime: mysql-database
     template: mysql-persistent-template
-    template.openshift.io/template-instance-owner: 2193c7ef-2542-459f-a8b4-4a90a9ca9d48
+    template.openshift.io/template-instance-owner: 369015a0-e05b-4eb0-8c18-82f644a34a37
 spec:
   strategy:
     type: Recreate
@@ -207,6 +224,10 @@ spec:
         - name: mysql-data
           persistentVolumeClaim:
             claimName: mysql
+        - name: init-script
+          configMap:
+            name: mysql-init-script
+            defaultMode: 420
       containers:
         - resources:
             limits:
@@ -265,39 +286,37 @@ spec:
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql/data
+          #  - name: mysql-init-script
+          #    mountPath: /docker-entrypoint-initdb.d
           terminationMessagePolicy: File
           image: >-
             image-registry.openshift-image-registry.svc:5000/openshift/mysql@sha256:6443851109d1afaa39ddd86a608729e031be459dcea9f6f86a24382ae3c655e4
-          lifecycle:                 # Add this block for the lifecycle hook
-            postStart:
-              exec:
-                command: ["/bin/bash", "-c", "curl -L https://github.com/helotbc/rosa-supporting-files/blob/main/studentsdb.sh -o /scripts/studentsdb.sh && chmod +x /scripts/studentsdb.sh && /scripts/studentsdb.sh"]
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
 status:
-  observedGeneration: 2
+  observedGeneration: 3
   details:
     message: config change
     causes:
       - type: ConfigChange
   availableReplicas: 1
   unavailableReplicas: 0
-  latestVersion: 1
+  latestVersion: 2
   updatedReplicas: 1
   conditions:
     - type: Available
       status: 'True'
-      lastUpdateTime: '2024-05-02T16:35:30Z'
-      lastTransitionTime: '2024-05-02T16:35:30Z'
+      lastUpdateTime: '2024-04-28T20:59:47Z'
+      lastTransitionTime: '2024-04-28T20:59:47Z'
       message: Deployment config has minimum availability.
     - type: Progressing
       status: 'True'
-      lastUpdateTime: '2024-05-02T16:35:32Z'
-      lastTransitionTime: '2024-05-02T16:35:32Z'
+      lastUpdateTime: '2024-04-28T20:59:49Z'
+      lastTransitionTime: '2024-04-28T20:59:35Z'
       reason: NewReplicationControllerAvailable
-      message: replication controller "mysql-1" successfully rolled out
+      message: replication controller "mysql-2" successfully rolled out
   replicas: 1
   readyReplicas: 1

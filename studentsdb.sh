@@ -2,8 +2,8 @@
 
 # Replace with your MySQL connection details (ensure these are secured using secrets in production)
 MYSQL_HOST="mysql"  # Replace with your MySQL service name
-MYSQL_USER="brendan123"
-MYSQL_PASSWORD="this-is-3857-password"
+MYSQL_USER="root"
+MYSQL_PASSWORD="this-is-root-785-password"
 
 # Connect to MySQL server and execute commands
 mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD << EOF

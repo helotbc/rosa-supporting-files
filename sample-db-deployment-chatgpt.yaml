@@ -1,0 +1,112 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    template.alpha.openshift.io/wait-for-ready: 'true'
+  resourceVersion: '2136092'
+  name: mysql
+  uid: 272f1b7f-5816-44d5-8423-d915ec3d1e98
+  creationTimestamp: '2024-04-28T20:54:00Z'
+  generation: 3
+  managedFields:
+    # Your managed fields
+spec:
+  # Your existing specification
+  template:
+    # Your existing template configuration
+    spec:
+      # Your existing container configurations
+      containers:
+        - resources:
+            limits:
+              memory: 512Mi
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - '-i'
+                - '-c'
+                - MYSQL_PWD="$MYSQL_PASSWORD" mysqladmin -u $MYSQL_USER ping
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: mysql
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - '-i'
+                - '-c'
+                - MYSQL_PWD="$MYSQL_PASSWORD" mysqladmin -u $MYSQL_USER ping
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: database-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: database-password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: database-root-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: database-name
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql/data
+          terminationMessagePolicy: File
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/openshift/mysql@sha256:6443851109d1afaa39ddd86a608729e031be459dcea9f6f86a24382ae3c655e4
+          lifecycle:                 # Add this block for the lifecycle hook
+            postStart:
+              exec:
+                command: ["/bin/bash", "-c", "curl -L https://raw.githubusercontent.com/username/repository/main/create_users.sh -o /path/to/create_users.sh && chmod +x /path/to/create_users.sh && /path/to/create_users.sh"]
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+status:
+  observedGeneration: 3
+  details:
+    message: config change
+    causes:
+      - type: ConfigChange
+  availableReplicas: 1
+  unavailableReplicas: 0
+  latestVersion: 2
+  updatedReplicas: 1
+  conditions:
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2024-04-28T20:59:47Z'
+      lastTransitionTime: '2024-04-28T20:59:47Z'
+      message: Deployment config has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2024-04-28T20:59:49Z'
+      lastTransitionTime: '2024-04-28T20:59:35Z'
+      reason: NewReplicationControllerAvailable
+      message: replication controller "mysql-2" successfully rolled out
+  replicas: 1
+  readyReplicas: 1

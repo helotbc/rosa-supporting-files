@@ -4,24 +4,26 @@ metadata:
   name: mysql-init-script
 data:
   MYSQL_DATABASE: "students"
-  MYSQL_USER: "brendan123"
+  MYSQL_USER: "root"
   default_auth: |
     [mysqld]
     default_authentication_plugin=mysql_native_password
   init.sql: |
     CREATE DATABASE IF NOT EXISTS students;
+    -- CREATE DATABASE students;
     USE students;
     CREATE TABLE IF NOT EXISTS students (
-       firstname VARCHAR(255) NOT NULL,
+    --  CREATE TABLE students (
+      firstname VARCHAR(255) NOT NULL,
       lastname VARCHAR(255) NOT NULL,
       email VARCHAR(255) UNIQUE NOT NULL,
       PRIMARY KEY (email) -- Set email as the primary key for efficient lookups
     );
-      -- Create the user 'brendan123'
-    CREATE USER 'brendan123'@'%' IDENTIFIED BY 'this-is-3857-password';
+     -- Create the user 'brendan123'
+     --CREATE USER 'brendan123'@'%' IDENTIFIED BY 'this-is-3857-password';
 
-    -- Grant all privileges on the 'students' database to the user 'brendan123'
-    GRANT ALL PRIVILEGES ON students.* TO 'brendan123'@'%';
+     --Grant all privileges on the 'students' database to the user 'brendan123'
+     --GRANT ALL PRIVILEGES ON students.* TO 'brendan123'@'%';
 
-    -- Flush privileges to apply changes
-    FLUSH PRIVILEGES;
+     --Flush privileges to apply changes
+     --FLUSH PRIVILEGES;
