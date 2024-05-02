@@ -11,7 +11,7 @@ echo "Checking if MySQL server is running..." >> dbscript.log
 
     echo "Sleeping for 2 minutes..." >> dbscript.log
     # Sleep for 2 minutes
-    sleep 120
+    sleep 600
 
     echo "End of sleep" >> dbscript.log
 
