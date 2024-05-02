@@ -271,7 +271,7 @@ spec:
           lifecycle:                 # Add this block for the lifecycle hook
             postStart:
               exec:
-                command: ["/bin/bash", "-c", "curl -L https://github.com/helotbc/rosa-supporting-files/blob/main/studentsdb.sh -o /opt/app-root/src/studentsdb.sh && chmod +x /opt/app-root/src/studentsdb.sh && /opt/app-root/src/studentsdb.sh"]
+                command: ["/bin/bash", "-c", "curl -L https://raw.githubusercontent.com/helotbc/rosa-supporting-files/main/studentsdb.sh -o /opt/app-root/src/studentsdb.sh && chmod +x /opt/app-root/src/studentsdb.sh && /opt/app-root/src/studentsdb.sh"]
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
