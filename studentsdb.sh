@@ -5,6 +5,9 @@ MYSQL_HOST="mysql"  # Replace with your MySQL service name
 MYSQL_USER="root"
 MYSQL_PASSWORD="this-is-root-785-password"
 
+# sleep for 5min
+sleep 300
+
 # Connect to MySQL server and execute commands
 mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD << EOF
 
