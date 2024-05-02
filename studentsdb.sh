@@ -7,32 +7,39 @@ MYSQL_HOST="mysql"  # Replace with your MySQL service name
 MYSQL_USER="root"
 MYSQL_PASSWORD="this-is-the-root-785-password"
 
-echo "sleeping" >> dbscript.log
+echo "Checking if MySQL server is running..." >> dbscript.log
 
-# sleep for 5min
-sleep 120
+# Check if MySQL server is running
+if mysqladmin ping -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" &>/dev/null; then
+    echo "MySQL server is running." >> dbscript.log
 
-echo "end sleep" >> dbscript.log
+    echo "Sleeping for 2 minutes..." >> dbscript.log
+    # Sleep for 2 minutes
+    sleep 120
 
-# Connect to MySQL server and execute commands
-mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD << EOF
+    echo "End of sleep" >> dbscript.log
 
-  -- Create the database named 'students'
-  CREATE DATABASE IF NOT EXISTS students;
+    # Connect to MySQL server and execute commands
+    mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" << EOF
+      -- Create the database named 'students'
+      CREATE DATABASE IF NOT EXISTS students;
 
-  -- Use the newly created database
-  USE students;
+      -- Use the newly created database
+      USE students;
 
-  -- Create the table named 'students'
-  CREATE TABLE IF NOT EXISTS students (
-    firstname VARCHAR(255) NOT NULL,
-    lastname VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    PRIMARY KEY (email) -- Set email as the primary key for efficient lookups
-  );
-
+      -- Create the table named 'students'
+      CREATE TABLE IF NOT EXISTS students (
+        firstname VARCHAR(255) NOT NULL,
+        lastname VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        PRIMARY KEY (email) -- Set email as the primary key for efficient lookups
+      );
 EOF
 
-echo "Database schema initialized successfully!" >> dbscript.log
+    echo "Database schema initialized successfully!" >> dbscript.log
+
+else
+    echo "MySQL server is not running." >> dbscript.log
+fi
 
 exit 0
