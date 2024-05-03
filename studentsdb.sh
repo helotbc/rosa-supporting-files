@@ -9,7 +9,7 @@ MYSQL_PASSWORD="this-is-the-root-785-password"
 
 
 
-    echo "Sleeping for 2 minutes..." >> dbscript.log
+    echo "Sleeping for 5 minutes..." >> dbscript.log
     # Sleep for 5 minutes
     sleep 600
 
