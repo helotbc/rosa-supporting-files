@@ -9,11 +9,11 @@ MYSQL_PASSWORD="this-is-the-root-785-password"
 
 
 
-    echo "Sleeping for 5 minutes..." >> dbscript.log
+    #echo "Sleeping for 5 minutes..." >> dbscript.log
     # Sleep for 5 minutes
-    sleep 600
+    #sleep 600
 
-    echo "End of sleep" >> dbscript.log
+    #echo "End of sleep" >> dbscript.log
 
 # Check if MySQL server is running
 
